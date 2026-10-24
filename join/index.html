@@ -195,6 +195,7 @@ legend{padding:0;margin-bottom:10px}
 .first.has-video{grid-template-columns:minmax(0,300px) minmax(0,1fr)}
 .first.has-video:not(.wide) .first-body{grid-template-columns:minmax(0,1fr)}
 .first.has-video.wide{grid-template-columns:minmax(0,1fr)}
+.first.has-video.wide .w-video{width:75%;justify-self:center}   /* desktop: 25% smaller than the card */
 .w-video{min-width:0}
 .w-video-frame{width:100%;border-radius:var(--r);overflow:hidden;background:var(--brown)}
 .w-video-frame wistia-player{display:block;width:100%;height:100%}
@@ -244,6 +245,7 @@ footer a{color:var(--muted)}
   .story{grid-area:story}
   .card{position:static}
   .first,.first.has-video{grid-template-columns:minmax(0,1fr);padding:24px}
+  .first.has-video.wide .w-video{width:100%}
   .first-body{grid-template-columns:minmax(0,1fr)}
   .first.has-video:not(.wide) .w-video{max-width:340px}
   .w-grid{grid-template-columns:minmax(0,1fr);gap:32px}
