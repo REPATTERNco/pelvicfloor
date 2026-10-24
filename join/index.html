@@ -187,9 +187,23 @@ legend{padding:0;margin-bottom:10px}
 .w-hero .intro-text{gap:14px}
 
 .first{
-  display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px 48px;align-items:center;
+  display:grid;grid-template-columns:minmax(0,1fr);gap:28px 48px;align-items:center;
   background:var(--paper);border:1px solid var(--brown);border-radius:var(--r);padding:32px;
 }
+.first-body{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px 48px;align-items:center;min-width:0}
+/* With Dr. Lily's welcome video: a vertical video sits beside the step; a horizontal one sits above it */
+.first.has-video{grid-template-columns:minmax(0,300px) minmax(0,1fr)}
+.first.has-video .first-body{grid-template-columns:minmax(0,1fr)}
+.first.has-video.wide{grid-template-columns:minmax(0,1fr)}
+.w-video{min-width:0}
+.w-video-frame{width:100%;border-radius:var(--r);overflow:hidden;background:var(--brown)}
+.w-video-frame wistia-player{display:block;width:100%;height:100%}
+.w-video-ph{width:100%;height:100%;display:grid;align-content:center;justify-items:center;gap:8px;padding:24px;text-align:center;color:var(--cream);
+  background:repeating-linear-gradient(135deg,rgba(237,230,218,.05) 0 10px,transparent 10px 20px),var(--brown);border:1px dashed rgba(237,230,218,.35);border-radius:var(--r)}
+.w-video-ph svg{opacity:.85}
+.w-video-ph p{margin:0}
+.w-video-ph .ph-title{font-size:20px}
+.w-video-ph .ph-note{font-size:12.5px;opacity:.7;max-width:26ch}
 .first-text{display:grid;gap:12px;min-width:0}
 .first h2{font-size:clamp(1.6rem,3vw,2.1rem)}
 .first p{margin:0;max-width:56ch}
@@ -213,8 +227,6 @@ legend{padding:0;margin-bottom:10px}
 .miss{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--clay)}
 .qa-date{font-size:26px}
 .textlink{font-weight:600;color:var(--brown);text-underline-offset:3px}
-.theme-strip{margin:0;padding:18px 20px;border-radius:var(--r);background:var(--sand);font-size:15px}
-.theme-strip strong{font-weight:700}
 
 footer{border-top:1px solid var(--line);padding-block:22px 90px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
 footer a{color:var(--muted)}
@@ -235,7 +247,9 @@ footer a{color:var(--muted)}
   .intro{grid-area:intro}
   .story{grid-area:story}
   .card{position:static}
-  .first{grid-template-columns:minmax(0,1fr);padding:24px}
+  .first,.first.has-video{grid-template-columns:minmax(0,1fr);padding:24px}
+  .first-body{grid-template-columns:minmax(0,1fr)}
+  .first.has-video:not(.wide) .w-video{max-width:340px}
   .w-grid{grid-template-columns:minmax(0,1fr);gap:32px}
 }
 @media (max-width:640px){
@@ -383,7 +397,11 @@ footer a{color:var(--muted)}
     </div>
   </div>
 
-  <section class="first" aria-labelledby="first-title">
+  <section class="first" id="first" aria-labelledby="first-title">
+    <div class="w-video" id="w-video" hidden>
+      <div class="w-video-frame" id="w-video-frame"></div>
+    </div>
+    <div class="first-body">
     <div class="first-text">
       <p class="label">Start here</p>
       <h2 id="first-title">Watch the Start Here videos, then begin Foundation</h2>
@@ -394,6 +412,7 @@ footer a{color:var(--muted)}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <p class="note">Sign in with the email you used at checkout.</p>
+    </div>
     </div>
   </section>
 
@@ -414,15 +433,13 @@ footer a{color:var(--muted)}
     </section>
 
     <section aria-labelledby="qa-title" id="qa-section">
-      <p class="label">Next live Q&amp;A</p>
-      <h3 id="qa-title" class="qa-date">Wednesday, November 4</h3>
+      <p class="label" id="qa-label">Live Q&amp;A with Dr. Lily</p>
+      <h3 id="qa-title" class="qa-date">Every other Wednesday</h3>
       <p id="qa-time">9:00 AM Pacific · 12:00 PM Eastern · 50 minutes</p>
-      <p><a class="textlink" id="qa-cal" href="#">Add it to Google Calendar</a></p>
-      <p class="note">Reserve your spot in the app under Schedule.</p>
+      <p id="qa-cal-wrap" hidden><a class="textlink" id="qa-cal" href="#">Add it to Google Calendar</a></p>
+      <p class="note" id="qa-note">Find the next date and save your spot in the app under Schedule.</p>
     </section>
   </div>
-
-  <p class="theme-strip" id="w-theme"><strong>Heal Your Pelvic Floor</strong> opens inside REVIVAL on Monday, November 16. Finish Foundation first so you're ready.</p>
 </main>
 
 <footer class="wrap">
@@ -463,6 +480,10 @@ const CONFIG = {
     iphone:    "",                     // App Store listing for the branded app
     android:   "",                     // Arketa dashboard: Sales Channels > Mobile App > Android app download
     community: ""                      // optional: community sign-in link
+  },
+  welcomeVideo: {                      // Dr. Lily's video on the thank-you page
+    wistiaId: "",                      // Wistia media ID (the code in the video's Wistia link)
+    aspect: 0.5625                     // 0.5625 for a vertical phone video, 1.7778 for horizontal
   },
   // Live Q&A with Dr. Lily, every other Wednesday, 9:00 AM Pacific, 50 minutes (from the Arketa schedule)
   qa: ["2026-11-04T17:00:00Z","2026-11-18T17:00:00Z","2026-12-02T17:00:00Z","2026-12-16T17:00:00Z","2026-12-30T17:00:00Z","2027-01-13T17:00:00Z"],
@@ -514,16 +535,12 @@ const CONFIG = {
     $("#step4-when").textContent = "Your own pace";
     $("#step4-what").textContent = "Work through " + M + "'s videos. Everything stays in the library.";
     $("#inc-theme").textContent = M + "'s theme, open now.";
-    $("#w-theme").innerHTML = "<strong></strong> is open. Once you've done Foundation, move into " + M + "'s videos at your own pace.";
-    $("#w-theme strong").textContent = T;
   } else {
     $("#h1-line").textContent = "Be ready on " + opensMd + ".";
     $("#lede").textContent = "Every new member begins with the six Foundation videos, so joining now means you're ready when " + T + " opens inside REVIVAL on " + opensLong + ".";
     $("#step4-when").textContent = opensShort;
     $("#step4-what").textContent = T + " opens, and you're ready.";
     $("#inc-theme").textContent = M + "'s theme, opening " + opensLong + ".";
-    $("#w-theme").innerHTML = "<strong></strong> opens inside REVIVAL on " + opensLong + ". Finish Foundation first so you're ready.";
-    $("#w-theme strong").textContent = T;
   }
 
   /* ---- Support email ---- */
@@ -632,8 +649,34 @@ const CONFIG = {
     const z = (d) => d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
     $("#qa-cal").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent("REVIVAL live Q&A with Dr. Lily") +
       "&dates=" + z(nextQa) + "/" + z(end) + "&details=" + encodeURIComponent("Join from the REVIVAL app under Schedule.");
-  } else {
-    $("#qa-section").hidden = true;
+    $("#qa-label").textContent = "Next live Q&A";
+    $("#qa-cal-wrap").hidden = false;
+    $("#qa-note").textContent = "Reserve your spot in the app under Schedule.";
+  }
+  // With no upcoming date in the settings, the card keeps its evergreen text: every other Wednesday, 9:00 AM Pacific.
+
+  /* ---- Dr. Lily's welcome video (Wistia, same player as the VSL pages) ---- */
+  const V = CONFIG.welcomeVideo || {};
+  const vId = /^[a-z0-9]+$/i.test(V.wistiaId || "") ? V.wistiaId : "";
+  const vAspect = Number(V.aspect) > 0 ? Number(V.aspect) : 0.5625;
+  let videoReady = false;
+  function setupVideo(){
+    if (videoReady) return;
+    videoReady = true;
+    if (!vId && !CONFIG.preview) return;        // live site: no video set yet, the step shows on its own
+    const first = $("#first"), frame = $("#w-video-frame");
+    $("#w-video").hidden = false;
+    first.classList.add("has-video");
+    if (vAspect >= 1) first.classList.add("wide");
+    frame.style.aspectRatio = String(vAspect);
+    if (vId){
+      [["https://fast.wistia.com/player.js", false], ["https://fast.wistia.com/embed/" + vId + ".js", true]].forEach(([src, mod]) => {
+        const s = document.createElement("script"); s.src = src; s.async = true; if (mod) s.type = "module"; document.head.appendChild(s);
+      });
+      frame.innerHTML = '<wistia-player media-id="' + vId + '" aspect="' + vAspect + '"></wistia-player>';
+    } else {
+      frame.innerHTML = '<div class="w-video-ph"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z" fill="currentColor"/></svg><p class="ph-title serif">Dr. Lily\'s welcome video</p><p class="ph-note">Add the Wistia video ID in the page settings and it plays here.</p></div>';
+    }
   }
 
   /* ---- Views ---- */
@@ -647,6 +690,7 @@ const CONFIG = {
     $("#w-plan").textContent = (p === "annual" ? "Your annual membership is set up. " : p === "monthly" ? "Your monthly membership is set up. " : "") + "Here's how to get started today.";
     $("#pv-checkout").setAttribute("aria-pressed", String(!isW));
     $("#pv-welcome").setAttribute("aria-pressed", String(isW));
+    if (isW) setupVideo();
     updateBar();
   }
   if (CONFIG.preview){
