@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#EDE6DA">
 <title>Heal Your Pelvic Floor | REVIVAL</title>
-<meta name="description" content="Take the pressure off your pelvic floor by expanding your rib cage and getting tone up into your bum. Heal Your Pelvic Floor opens inside REVIVAL on Monday, November 16.">
+<meta name="description" content="Stop peeing yourself when you laugh, let sex feel good again, and heal the diastasis recti that never closed. Heal Your Pelvic Floor opens inside REVIVAL on Monday, November 16.">
 <meta property="og:title" content="Heal Your Pelvic Floor Without Another Kegel">
-<meta property="og:description" content="Take the pressure off your pelvic floor by expanding your rib cage and getting tone up into your bum. Heal Your Pelvic Floor opens inside REVIVAL on Monday, November 16.">
+<meta property="og:description" content="Stop peeing yourself when you laugh, let sex feel good again, and heal the diastasis recti that never closed. Heal Your Pelvic Floor opens inside REVIVAL on Monday, November 16.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://pelvicfloor.repatternco.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -95,6 +95,8 @@ header .serif{font-size:21px;letter-spacing:.08em}
 .annual{display:flex;flex-direction:column;gap:10px;padding-top:14px;border-top:1px solid var(--line)}
 .annual p{margin:0;font-size:14.5px;line-height:1.5}
 .annual strong{font-weight:700}
+.allin{margin:-8px 0 0;font-size:14px;line-height:1.45;color:var(--ink-soft)}
+.annual .allin{margin:0;font-size:13.5px}
 .hero-info .note{margin:0;font-size:15px;line-height:1.55}
 .facts{display:flex;flex-wrap:wrap;gap:8px 24px;font-size:14px;font-weight:600;letter-spacing:.02em}
 .facts span{display:inline-flex;align-items:center;gap:8px}
@@ -177,6 +179,13 @@ header .serif{font-size:21px;letter-spacing:.08em}
 .get-buy{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 40px;margin-top:40px;padding-top:40px;border-top:1px solid var(--line-dark)}
 .get-buy .serif{font-size:clamp(28px,3vw,40px);line-height:1.1}
 .get-buy .small{font-size:16px;color:var(--on-dark-soft);margin-top:6px}
+.get-buy .pt{margin:0 0 8px;font-size:17px;line-height:1.5;color:var(--on-dark-soft)}
+/* Inside REVIVAL: real member-area screens in simple phone frames */
+.screens{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:44px}
+.screen{margin:0;display:flex;flex-direction:column;gap:14px;min-width:0}
+.phone{background:#1B130F;border:1px solid var(--line-dark);border-radius:26px;padding:7px;box-shadow:0 24px 44px -28px rgba(0,0,0,.7)}
+.phone img{width:100%;height:auto;border-radius:19px}
+.screen figcaption{font-size:15px;line-height:1.45;color:var(--on-dark-soft)}
 .buttons{display:flex;flex-wrap:wrap;gap:12px}
 
 /* Timeline */
@@ -245,6 +254,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;p
   .o1{order:1}.o2{order:2}.o3{order:3}.o4{order:4}.o5{order:5}.o6{order:6}
   .timeline{grid-template-columns:minmax(0,1fr);gap:36px}
   .getgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .screens{grid-template-columns:repeat(2,minmax(0,1fr));max-width:620px}
   .lily img{max-width:420px}
 }
 @media (max-width:640px){
@@ -269,6 +279,8 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;p
   .faq summary{font-size:20px}
   .section,.dark,.get{padding-block:56px}
   .getgrid{grid-template-columns:minmax(0,1fr)}
+  .screens{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin-top:32px;padding-bottom:8px;-webkit-overflow-scrolling:touch;max-width:none}
+  .screen{flex:0 0 64%;scroll-snap-align:start}
   .wall,.wall-col{gap:40px}
   .panels{gap:10px}
   .panel{padding:12px 8px}
@@ -309,7 +321,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;p
   <div class="hero-head">
     <div class="pill">For people the normal pelvic floor advice hasn’t worked for</div>
     <h1 id="hero-title">Heal Your Pelvic Floor <em>Without Another Kegel</em></h1>
-    <p class="sub">Take the pressure off your pelvic floor by expanding your rib cage and getting tone up into your bum.</p>
+    <p class="sub">Stop peeing yourself when you laugh, let sex feel good again, and heal the diastasis recti that never closed. It starts by taking the load off your pelvic floor.</p>
   </div>
 
   <div class="hero-main">
@@ -323,9 +335,11 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;p
     <div id="join" class="offer" aria-label="Join REVIVAL">
       <div class="price"><span class="num">$49</span><span class="per">a month</span></div>
       <p class="price-note">Month to month, cancel anytime.</p>
+      <p class="allin">$54.81 all-in with sales tax and the processing fee.</p>
       <a class="btn" data-plan="monthly" data-loc="hero" href="/join/?plan=monthly">Become a REVIVAL Member <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <div class="annual">
         <p>Prefer to commit for the year? <strong>12 months for the price of 10.</strong> $490 instead of $588.</p>
+        <p class="allin">$545.31 all-in with sales tax and the processing fee.</p>
         <a class="btn btn-line" data-plan="annual" data-loc="hero" href="/join/?plan=annual">Join for the Year <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
@@ -336,6 +350,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;p
       <p class="note" data-phase="after" hidden>The theme is live. Join, start Foundation, and move into the pelvic floor videos at your own pace.</p>
       <div class="facts">
         <span data-countdown-wrap><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Heal Your Pelvic Floor opens in <span data-countdown>23d</span></span>
+        <span data-phase="after" hidden><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Heal Your Pelvic Floor is open now</span>
         <span><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>870+ members already inside REVIVAL</span>
       </div>
     </div>
@@ -514,9 +529,15 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;p
       <div class="label">Inside REVIVAL</div>
       <h2 id="get-title" class="h2">What you get when you join</h2>
     </div>
+    <div class="screens">
+      <figure class="screen"><div class="phone"><img src="img/inside-library.jpg" width="375" height="742" loading="lazy" decoding="async" alt="The REVIVAL video library on a phone, opening on the Start Here videos with Dr. Lily"></div><figcaption>Start Here and the full video library</figcaption></figure>
+      <figure class="screen"><div class="phone"><img src="img/inside-foundations.jpg" width="375" height="742" loading="lazy" decoding="async" alt="The Foundations series page with a Watch Now button and Dr. Lily on her deck"></div><figcaption>The Foundation series every new member starts with</figcaption></figure>
+      <figure class="screen"><div class="phone"><img src="img/inside-video.jpg" width="375" height="742" loading="lazy" decoding="async" alt="Foundation 1 video page with Dr. Lily's notes on the Posture Foundations Principles"></div><figcaption>Foundation 1, taught by Dr. Lily</figcaption></figure>
+      <figure class="screen"><div class="phone"><img src="img/inside-community.jpg" width="375" height="742" loading="lazy" decoding="async" alt="A member's pelvic floor question in the REVIVAL community with Dr. Lily's reply underneath"></div><figcaption>Dr. Lily answering a pelvic floor question in the community (member's name hidden)</figcaption></figure>
+    </div>
     <div class="getgrid">
       <div><svg class="icon" aria-hidden="true"><use href="#i-stack"/></svg><div class="serif">The Foundation series</div><p>Six videos every new member starts with. Your body is a web, and Foundation teaches the pieces your pelvic floor work builds on.</p></div>
-      <div><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg><div class="serif">Heal Your Pelvic Floor</div><p>November’s theme: little videos that fit into your daily life, including release work for the fascia of the pelvic floor. Opens Monday, November 16.</p></div>
+      <div><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg><div class="serif">Heal Your Pelvic Floor</div><p>November’s theme: little videos that fit into your daily life, including release work for the fascia of the pelvic floor. <span data-phase="before">Opens Monday, November 16.</span><span data-phase="after" hidden>Open now.</span></p></div>
       <div><svg class="icon" aria-hidden="true"><use href="#i-timer"/></svg><div class="serif">Workouts from 10 to 60 minutes</div><p>At home, at your own time, anytime.</p></div>
       <div><svg class="icon" aria-hidden="true"><use href="#i-video"/></svg><div class="serif">A live Q&amp;A every other week</div><p>Bring what you’re processing through to Dr. Lily, live.</p></div>
       <div><svg class="icon" aria-hidden="true"><use href="#i-books"/></svg><div class="serif">The full video library</div><p>The themes never go away. Past themes include back pain and building muscle and bone without lifting heavy, plus the Reshape and Regulate series.</p></div>
@@ -524,8 +545,10 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;p
     </div>
     <div class="get-buy">
       <div>
-        <div class="serif">$49 a month</div>
-        <div class="small">Month to month, cancel anytime. Or $490 for the year, 12 months for the price of 10.</div>
+        <p class="pt">One self-pay pelvic floor PT visit runs $180 to $250.</p>
+        <div class="serif">A whole month of REVIVAL is $49.</div>
+        <div class="small">Month to month, cancel anytime. $54.81 all-in with sales tax and the processing fee.</div>
+        <div class="small">Or $490 for the year, 12 months for the price of 10. $545.31 all-in with sales tax and the processing fee.</div>
       </div>
       <div class="buttons">
         <a class="btn" data-plan="monthly" data-loc="inside" href="/join/?plan=monthly">Become a REVIVAL Member <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -571,9 +594,9 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;p
   <div class="wrap">
     <h2 id="faq-title" class="h2">Questions</h2>
     <div class="faq">
-      <details><summary>I’ve tried everything. Is it too late for me?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="answer"><p>I specialize in the women the normal pelvic floor advice hasn’t worked for, and I was one of them. I saw many pelvic floor providers and did all of the exercises and protocols, and the pain would not go away.</p><p>Our bodies are geniuses that are healing all the time. When you take the pressure off the whole system instead of tightening one area, your pelvic floor has room to heal. Start with Foundation and go slowly.</p></div></details>
-      <details><summary>My PT gave me Kegels. Aren’t those good?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="answer"><p>If you just make your pelvic floor tighter, it’s going to feel tighter, and that means sex isn’t going to feel good. I don’t want to discount that Kegels probably worked for some of you.</p><p>They’re like a band-aid, though. They make one area tighter instead of taking the pressure off the whole system, so there are no Kegels in REVIVAL.</p></div></details>
-      <details><summary>I’m pregnant or postpartum<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="answer"><p>These principles cover every stage: before you get pregnant, during pregnancy, during the birth, and long into postpartum.</p><p>Diastasis recti is normal in pregnancy, and it heals on its own. Sucking in and tightening your core to knit it back together pulls it further apart. Your diastasis will heal faster with less tightness in your core.</p><p>Around birth, move slowly and focus on the Foundations section. Every mama, pregnancy, birth, and recovery is different. Pain is never right.</p></div></details>
+      <details open><summary>I’ve tried everything. Is it too late for me?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="answer"><p>I specialize in the women the normal pelvic floor advice hasn’t worked for, and I was one of them. I saw many pelvic floor providers and did all of the exercises and protocols, and the pain would not go away.</p><p>Our bodies are geniuses that are healing all the time. When you take the pressure off the whole system instead of tightening one area, your pelvic floor has room to heal. Start with Foundation and go slowly.</p></div></details>
+      <details open><summary>My PT gave me Kegels. Aren’t those good?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="answer"><p>If you just make your pelvic floor tighter, it’s going to feel tighter, and that means sex isn’t going to feel good. I don’t want to discount that Kegels probably worked for some of you.</p><p>They’re like a band-aid, though. They make one area tighter instead of taking the pressure off the whole system, so there are no Kegels in REVIVAL.</p></div></details>
+      <details open><summary>I’m pregnant or postpartum<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="answer"><p>These principles cover every stage: before you get pregnant, during pregnancy, during the birth, and long into postpartum.</p><p>Diastasis recti is normal in pregnancy, and it heals on its own. Sucking in and tightening your core to knit it back together pulls it further apart. Your diastasis will heal faster with less tightness in your core.</p><p>Around birth, move slowly and focus on the Foundations section. Every mama, pregnancy, birth, and recovery is different. Pain is never right.</p></div></details>
       <details><summary>Does this work for men?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="answer"><p>Yes. Men’s pelvic floors take the same pressure, and these principles can be really helpful with things like having to pee a bunch of times throughout the night, hernias, or dribbling when you pee.</p></div></details>
       <details><summary>I’m a beginner, older, or in pain. Can I do this?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="answer"><p>Yes. There’s the Foundation series, a Reshape series for doing bodywork on yourself, and a Regulate series where you can work completely on the floor. Move slowly. Pain is never right.</p></div></details>
       <details><summary>What is the time commitment?<svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="answer"><p>You can make it fit your life. The theme is made of little videos that fit into your daily life, and you can do them at home, anytime.</p><p>We recommend three 20 to 60 minute strength workouts each week, 10 to 60 minute videos on the other days, and Sunday rest for sunshine and family.</p></div></details>
@@ -628,6 +651,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;p
       <a class="btn btn-line" data-plan="annual" data-loc="close" href="/join/?plan=annual">Join for the Year</a>
     </div>
     <div class="count" data-countdown-wrap><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Heal Your Pelvic Floor opens in <span data-countdown>23d</span></div>
+    <div class="count" data-phase="after" hidden><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>Heal Your Pelvic Floor is open now</div>
   </div>
 </section>
 </main>
