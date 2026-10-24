@@ -193,17 +193,13 @@ legend{padding:0;margin-bottom:10px}
 .first-body{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px 48px;align-items:center;min-width:0}
 /* With Dr. Lily's welcome video: a vertical video sits beside the step; a horizontal one sits above it */
 .first.has-video{grid-template-columns:minmax(0,300px) minmax(0,1fr)}
-.first.has-video .first-body{grid-template-columns:minmax(0,1fr)}
+.first.has-video:not(.wide) .first-body{grid-template-columns:minmax(0,1fr)}
 .first.has-video.wide{grid-template-columns:minmax(0,1fr)}
 .w-video{min-width:0}
 .w-video-frame{width:100%;border-radius:var(--r);overflow:hidden;background:var(--brown)}
 .w-video-frame wistia-player{display:block;width:100%;height:100%}
-.w-video-ph{width:100%;height:100%;display:grid;align-content:center;justify-items:center;gap:8px;padding:24px;text-align:center;color:var(--cream);
-  background:repeating-linear-gradient(135deg,rgba(237,230,218,.05) 0 10px,transparent 10px 20px),var(--brown);border:1px dashed rgba(237,230,218,.35);border-radius:var(--r)}
-.w-video-ph svg{opacity:.85}
-.w-video-ph p{margin:0}
-.w-video-ph .ph-title{font-size:20px}
-.w-video-ph .ph-note{font-size:12.5px;opacity:.7;max-width:26ch}
+.w-video-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;
+  color:var(--cream);background:var(--brown);font-family:var(--display);font-size:clamp(20px,2.4vw,28px);line-height:1.2}
 .first-text{display:grid;gap:12px;min-width:0}
 .first h2{font-size:clamp(1.6rem,3vw,2.1rem)}
 .first p{margin:0;max-width:56ch}
@@ -483,7 +479,7 @@ const CONFIG = {
   },
   welcomeVideo: {                      // Dr. Lily's video on the thank-you page
     wistiaId: "",                      // Wistia media ID (the code in the video's Wistia link)
-    aspect: 0.5625                     // 0.5625 for a vertical phone video, 1.7778 for horizontal
+    aspect: 1.7778                     // 1.7778 for horizontal (16:9), 0.5625 for a vertical phone video
   },
   // Live Q&A with Dr. Lily, every other Wednesday, 9:00 AM Pacific, 50 minutes (from the Arketa schedule)
   qa: ["2026-11-04T17:00:00Z","2026-11-18T17:00:00Z","2026-12-02T17:00:00Z","2026-12-16T17:00:00Z","2026-12-30T17:00:00Z","2027-01-13T17:00:00Z"],
@@ -663,7 +659,6 @@ const CONFIG = {
   function setupVideo(){
     if (videoReady) return;
     videoReady = true;
-    if (!vId && !CONFIG.preview) return;        // live site: no video set yet, the step shows on its own
     const first = $("#first"), frame = $("#w-video-frame");
     $("#w-video").hidden = false;
     first.classList.add("has-video");
@@ -675,7 +670,7 @@ const CONFIG = {
       });
       frame.innerHTML = '<wistia-player media-id="' + vId + '" aspect="' + vAspect + '"></wistia-player>';
     } else {
-      frame.innerHTML = '<div class="w-video-ph"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l5.5 3.5-5.5 3.5z" fill="currentColor"/></svg><p class="ph-title serif">Dr. Lily\'s welcome video</p><p class="ph-note">Add the Wistia video ID in the page settings and it plays here.</p></div>';
+      frame.innerHTML = '<div class="w-video-ph">Dr. Lily’s video is coming soon</div>';   // same placeholder as the VSL page
     }
   }
 
