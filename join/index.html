@@ -66,6 +66,7 @@ h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;line
   display:grid;
   grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);
   grid-template-areas:"intro card" "story card";
+  grid-template-rows:auto 1fr;   /* a tall Arketa form adds height below the story, not between intro and story */
   column-gap:64px;row-gap:44px;
   padding-block:36px 110px;align-items:start;
 }
@@ -228,7 +229,7 @@ footer a{color:var(--muted)}
 .pv button[aria-pressed="true"]{background:var(--cream);color:var(--brown)}
 
 @media (max-width:860px){
-  .checkout{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "card" "story";row-gap:34px;padding-block:26px 110px}
+  .checkout{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "card" "story";grid-template-rows:none;row-gap:34px;padding-block:26px 110px}
   .card{position:static}
   .first{grid-template-columns:minmax(0,1fr);padding:24px}
   .w-grid{grid-template-columns:minmax(0,1fr);gap:32px}
