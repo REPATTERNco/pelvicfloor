@@ -231,6 +231,7 @@ legend{padding:0;margin-bottom:10px}
 .miss{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--clay)}
 .qa-date{font-size:26px}
 .textlink{font-weight:600;color:var(--brown);text-underline-offset:3px}
+.w-sub{display:grid;gap:12px;margin-top:10px;padding-top:20px;border-top:1px solid var(--line)}
 
 footer{border-top:1px solid var(--line);padding-block:22px 90px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
 footer a{color:var(--muted)}
@@ -305,14 +306,14 @@ footer a{color:var(--muted)}
       </div>
     </div>
     <p class="lede" id="lede">Every new member begins with the six Foundation videos, so joining now means you're ready when Heal Your Pelvic Floor opens inside REVIVAL on Monday, November 16.</p>
-    <p class="cred">Taught by <strong>Dr. Lily Baker</strong>, chiropractic physician and certified strength and conditioning specialist.</p>
+    <p class="cred">Taught by <strong>Dr. Lily Baker</strong>, Chiropractic Physician and Certified Strength and Conditioning Specialist.</p>
   </div>
 
 
 
   <div class="more" id="more">
     <p class="lede" id="lede-m"></p>
-    <p class="cred">Taught by <strong>Dr. Lily Baker</strong>, chiropractic physician and certified strength and conditioning specialist.</p>
+    <p class="cred">Taught by <strong>Dr. Lily Baker</strong>, Chiropractic Physician and Certified Strength and Conditioning Specialist.</p>
   </div>
 
   <div class="story">
@@ -455,7 +456,7 @@ footer a{color:var(--muted)}
     <section aria-labelledby="com-title">
       <p class="label">Community</p>
       <h3 id="com-title">Say hello</h3>
-      <p>Sign in with the email you used at checkout. Choose "Sign in with a secure code" and a code comes to your inbox, so there's no password to set up.</p>
+      <p>Reset your password with the email you used to sign up. Do not make a new account. You already have an account, you just need to reset your password to get access.</p>
       <div class="links" id="com-links"></div>
       <p class="note">If it doesn't let you in yet, give it a few minutes and try again.</p>
       <p>Once you're in, post one line about where you're joining from and what brought you to REVIVAL.</p>
@@ -465,8 +466,13 @@ footer a{color:var(--muted)}
       <p class="label" id="qa-label">Live Q&amp;A with Dr. Lily</p>
       <h3 id="qa-title" class="qa-date">Every other Wednesday</h3>
       <p id="qa-time">9:00 AM Pacific · 12:00 PM Eastern · 50 minutes</p>
-      <p id="qa-cal-wrap" hidden><a class="textlink" id="qa-cal" href="#">Add it to Google Calendar</a></p>
-      <p class="note" id="qa-note">Find the next date and save your spot in the app under Schedule.</p>
+      <p id="qa-cal-wrap" hidden>Add it to <a class="textlink" id="qa-cal" href="#">Google Calendar</a> or <a class="textlink" id="qa-ical" href="#">Apple Calendar</a></p>
+      <p>Join in the app under Live Q&amp;As, or on the website under the <a class="textlink" id="qa-lives" href="https://www.repatternco.com/lives">Lives tab</a>.</p>
+      <div class="w-sub" role="group" aria-labelledby="vr-title">
+        <p class="label" id="vr-title">Video requests</p>
+        <p>Want Dr. Lily to make a video on something? Send your request in the HUB in the app, or on the website.</p>
+        <div class="links" id="vr-links"></div>
+      </div>
     </section>
   </div>
 </main>
@@ -505,10 +511,12 @@ const CONFIG = {
   },
   links: {
     startHere: "https://app.arketa.co/repattern/on-demand/ScsHP5I2ks8OhBl2csuB",
-    web:       "https://app.arketa.co/repattern/on-demand",
-    iphone:    "",                     // App Store listing for the branded app
-    android:   "",                     // Arketa dashboard: Sales Channels > Mobile App > Android app download
-    community: "https://login.repatternco.com/communities/groups/repattern/home"   // REVIVAL community on Course Creator
+    web:       "https://www.repatternco.com/membership",   // "REVIVAL on every device" browser link (Lily's website, not the Arketa page)
+    iphone:    "https://apps.apple.com/us/app/repattern-co/id6778624062",   // App Store listing for the branded app
+    android:   "https://api.arketa.com/apk/repattern",   // Android app download
+    community: "https://login.repatternco.com/communities/groups/repattern/home",  // REVIVAL community on Course Creator
+    lives:     "https://www.repatternco.com/lives",            // Live Q&As on the website
+    videoRequests: "https://www.repatternco.com/video-requests" // Video requests on the website (the HUB in the app)
   },
   welcomeVideo: {                      // Dr. Lily's video on the thank-you page
     wistiaId: "",                      // Wistia media ID (the code in the video's Wistia link)
@@ -522,7 +530,10 @@ const CONFIG = {
     anchor: "2026-11-04",              // a known Q&A date
     time: "09:00", tz: "America/Los_Angeles", everyDays: 14
   },
-  qaMinutes: 50
+  qaMinutes: 50,
+  // Apple Calendar: a ready-made .ics file for each regular Q&A date (every other Wednesday, 9:00 AM Pacific).
+  // A date off that pattern gets a file built on the spot instead.
+  qaIcs: { base: "https://join.repatternco.com/checkout/qa/", until: "2028-12-31" }
 };
 
 (function(){
@@ -676,8 +687,10 @@ const CONFIG = {
     if (url) return '<a class="lbtn" href="' + url + '">' + icons[icon] + '<span>' + label + '</span>' + arrow + '</a>';
     return CONFIG.preview ? '<div class="lbtn missing">' + icons[icon] + '<span>' + label + '</span><span class="miss">Link needed</span></div>' : '';
   }
-  $("#app-links").innerHTML = linkBtn("iPhone app", CONFIG.links.iphone, "phone") + linkBtn("Android app", CONFIG.links.android, "phone") + linkBtn("Open in your browser", CONFIG.links.web, "web");
+  $("#app-links").innerHTML = linkBtn("Open in your browser", CONFIG.links.web, "web") + linkBtn("Access our app (Apple)", CONFIG.links.iphone, "phone") + linkBtn("Access our app (Android)", CONFIG.links.android, "phone");
   $("#com-links").innerHTML = CONFIG.links.community ? linkBtn("Open the community", CONFIG.links.community, "people") : "";
+  $("#qa-lives").href = CONFIG.links.lives;
+  $("#vr-links").innerHTML = linkBtn("Request a video", CONFIG.links.videoRequests, "web");
 
   // Wall-clock time in a time zone to the exact moment (handles daylight saving).
   function zonedToDate(ymd, hm, tz){
@@ -718,6 +731,36 @@ const CONFIG = {
       return next || null;
     } catch(e){ return null; } finally { clearTimeout(timer); }
   }
+  const QA_TITLE = "REVIVAL live Q&A with Dr. Lily";
+  const QA_DETAILS = "Join in the REVIVAL app under Live Q&As, or on the website under the Lives tab: " + CONFIG.links.lives;
+  const ymdIn = (d, tz) => {
+    const p = new Intl.DateTimeFormat("en-US",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d);
+    const g = (k) => p.find(x => x.type === k).value;
+    return g("year") + "-" + g("month") + "-" + g("day");
+  };
+  function fold(line){                 // calendar files keep lines to 75 characters
+    const out = [];
+    while (line.length > 75){ out.push(line.slice(0, 75)); line = " " + line.slice(75); }
+    out.push(line);
+    return out.join("\r\n");
+  }
+  function icsText(start, end){
+    const z = (d) => d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+    const esc = (t) => t.replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,");
+    return ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//REPATTERN co//REVIVAL//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
+      "BEGIN:VEVENT","UID:revival-live-qa-" + z(start) + "@repatternco.com","DTSTAMP:" + z(new Date()),
+      "DTSTART:" + z(start),"DTEND:" + z(end),"SUMMARY:" + esc(QA_TITLE),"DESCRIPTION:" + esc(QA_DETAILS),"URL:" + CONFIG.links.lives,
+      "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:" + esc(QA_TITLE),"TRIGGER:-PT15M","END:VALARM",
+      "END:VEVENT","END:VCALENDAR",""].map(fold).join("\r\n");
+  }
+  function appleCalHref(start, mins){
+    const S = CONFIG.qaSchedule, I = CONFIG.qaIcs, ymd = ymdIn(start, S.tz);
+    const days = Math.round((new Date(ymd + "T12:00:00Z") - new Date(S.anchor + "T12:00:00Z")) / 86400000);
+    const regular = I && ymd >= S.anchor && ymd <= I.until && days % S.everyDays === 0 &&
+      mins === CONFIG.qaMinutes && zonedToDate(ymd, S.time, S.tz).getTime() === start.getTime();
+    if (regular) return I.base + ymd + ".ics";
+    return "data:text/calendar;charset=utf-8," + encodeURIComponent(icsText(start, new Date(start.getTime() + mins * 60000)));
+  }
   function showQa(q){
     if (!q) return;   // no date known: the card keeps its evergreen text (every other Wednesday, 9:00 AM Pacific)
     const nextQa = q.start, mins = q.minutes;
@@ -726,11 +769,11 @@ const CONFIG = {
     $("#qa-title").textContent = nextQa.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",timeZone:"America/Los_Angeles"});
     $("#qa-time").textContent = tf("America/Los_Angeles") + " Pacific · " + tf("America/New_York") + " Eastern · " + mins + " minutes";
     const z = (d) => d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
-    $("#qa-cal").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent("REVIVAL live Q&A with Dr. Lily") +
-      "&dates=" + z(nextQa) + "/" + z(end) + "&details=" + encodeURIComponent("Join from the REVIVAL app under Schedule.");
+    $("#qa-cal").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(QA_TITLE) +
+      "&dates=" + z(nextQa) + "/" + z(end) + "&details=" + encodeURIComponent(QA_DETAILS);
+    $("#qa-ical").href = appleCalHref(nextQa, mins);
     $("#qa-label").textContent = "Next live Q&A";
     $("#qa-cal-wrap").hidden = false;
-    $("#qa-note").textContent = "Reserve your spot in the app under Schedule.";
   }
   let qaStarted = false;
   function loadQa(){
@@ -748,6 +791,7 @@ const CONFIG = {
   function setupVideo(){
     if (videoReady) return;
     videoReady = true;
+    if (!vId) return;                    // no video yet: keep the video area hidden (no placeholder)
     const first = $("#first"), frame = $("#w-video-frame");
     $("#w-video").hidden = false;
     first.classList.add("has-video");
