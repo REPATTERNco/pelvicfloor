@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Join REVIVAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+/* Layout: story column on the left (intro, what happens, what's included, Dr. Lily), plan card on the right that stays in view.
+   On phones it stacks intro, plan card, then the story. Brand tokens come from the REVIVAL theme page. */
+:root{
+  --cream:#EDE6DA;
+  --paper:#F6F1E8;
+  --paper-hi:#FBF8F2;
+  --brown:#3C2C24;
+  --muted:#6B5A4E;
+  --olive:#A2A569;
+  --olive-hover:#B4B77C;
+  --olive-deep:#6F7240;
+  --clay:#C2452D;
+  --sand:#D9CFC0;
+  --line:rgba(60,44,36,.22);
+  --display:"DM Serif Display",Georgia,"Times New Roman",serif;
+  --body:"Open Sans",Arial,Helvetica,sans-serif;
+  --r:6px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+body{
+  background:var(--cream);color:var(--brown);
+  font:16px/1.6 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+.wrap{max-width:1080px;margin-inline:auto}
+.serif{font-family:var(--display);font-weight:400}
+.label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+:focus-visible{outline:2px solid var(--brown);outline-offset:3px;border-radius:2px}
+
+/* Header */
+.top{display:flex;align-items:center;justify-content:center;gap:10px;padding-block:22px 6px}
+.top img{width:34px;height:34px}
+.top .serif{font-size:21px;letter-spacing:.08em}
+
+/* Shared: arch portrait */
+.arch{
+  flex:none;width:168px;max-width:100%;aspect-ratio:4/5;
+  border-radius:999px 999px var(--r) var(--r);
+  background:var(--sand) center 22%/cover no-repeat;
+  box-shadow:0 20px 40px -30px rgba(60,44,36,.55);
+}
+.john-photo{background-image:url("/john/img/dr-john-arch.jpg");background-position:center 20%}
+
+h1{font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,4.6vw,3.35rem);line-height:1.04;margin:0;text-wrap:balance;letter-spacing:-.005em}
+h1 em{display:block;font-style:italic;color:var(--muted)}
+h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;line-height:1.15}
+
+/* ---------- Checkout ---------- */
+.checkout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-areas:"left card";
+  column-gap:56px;row-gap:44px;
+  padding-block:36px 110px;align-items:start;
+}
+/* Left column scrolls with the page until its last line, then stays beside the form (top set in script) */
+.left{grid-area:left;display:grid;gap:44px;min-width:0;position:sticky;top:24px}
+.intro{display:grid;gap:22px}
+.intro-row{display:flex;gap:28px;align-items:flex-end}
+.intro-text{display:grid;gap:12px;min-width:0}
+.lede{margin:0;font-size:17px;max-width:58ch}
+.cred{margin:0;font-size:14px;color:var(--muted)}
+.cred strong{color:var(--brown);font-weight:600}
+
+.story{display:grid;gap:40px;min-width:0}
+.story section{display:grid;gap:16px}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.steps li{
+  display:grid;grid-template-columns:118px minmax(0,1fr);column-gap:18px;
+  padding-block:13px;border-top:1px solid var(--line);
+}
+.steps li:last-child{border-bottom:1px solid var(--line)}
+.when{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);padding-top:3px}
+.what{margin:0}
+
+.included{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.included li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;align-items:start}
+.included svg{margin-top:3px;color:var(--olive-deep)}
+.included strong{font-weight:600}
+
+.quotes{display:grid;gap:24px}
+.quote{margin:0;padding-top:24px;border-top:1px solid var(--line);display:grid;gap:10px}
+.quote p{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(1.3rem,2.4vw,1.6rem);line-height:1.3;max-width:34ch}
+.quote cite{font-style:normal;font-size:14px;color:var(--muted)}
+
+.help{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted);margin:0}
+.help svg{flex:none;margin-top:3px}
+.help a{color:var(--brown);font-weight:600;word-break:break-word}
+
+/* Plan card */
+.card{
+  grid-area:card;min-width:0;
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--r);
+  padding:28px;display:grid;gap:22px;
+  box-shadow:0 24px 50px -38px rgba(60,44,36,.5);
+}
+.terms{display:grid;gap:6px;margin-top:-6px}
+.terms p{margin:0}
+.allin{font-size:14px;font-weight:600}
+.pay{display:grid;gap:12px;padding-top:20px;border-top:1px solid var(--line)}
+.embed{margin-inline:-28px;overflow:hidden;background:var(--brown)}
+.embed iframe{display:block;width:100%;min-height:640px;border:0;background:var(--brown)}
+.embed-ph{min-height:520px;padding:26px 22px;display:grid;gap:14px;align-content:start;color:var(--cream);
+  background:repeating-linear-gradient(135deg,rgba(237,230,218,.05) 0 10px,transparent 10px 20px),var(--brown);
+  border:1px dashed rgba(237,230,218,.35)}
+.embed-ph p{margin:0}
+.ph-title{font-family:var(--display);font-size:22px;line-height:1.2}
+.ph-plan{font-weight:700;font-size:14px;letter-spacing:.04em}
+.embed-ph ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:14px;opacity:.9}
+.ph-note{font-size:12.5px;opacity:.7}
+
+/* Slim plan bar that stays at the top while they're filling in the form */
+.planbar{
+  position:fixed;left:0;right:0;top:0;z-index:15;
+  padding-top:calc(10px + env(safe-area-inset-top,0px));padding-bottom:10px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background:var(--brown);color:var(--cream);font-size:14px;
+  transform:translateY(-110%);transition:transform .25s ease;
+}
+.planbar.show{transform:none}
+.planbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.planbar strong{font-weight:700}
+.planbar button{border:1px solid rgba(237,230,218,.5);background:transparent;color:var(--cream);border-radius:999px;padding:6px 12px;font:600 13px var(--body);cursor:pointer;white-space:nowrap}
+.planbar button:hover{background:rgba(237,230,218,.12)}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.card-head h2{font-size:28px;letter-spacing:.02em}
+.headprice{font-family:var(--display);font-size:28px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.headprice small{font-family:var(--body);font-size:14px;color:var(--muted);margin-left:4px}
+
+fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:10px}
+legend{padding:0;margin-bottom:10px}
+.plan{
+  position:relative;display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:4px 12px;align-items:start;
+  padding:16px;border:1px solid var(--line);border-radius:var(--r);background:var(--cream);cursor:pointer;
+  transition:border-color .15s,background-color .15s,box-shadow .15s;
+}
+.plan:hover{border-color:rgba(60,44,36,.45)}
+.plan.is-on{background:var(--paper-hi);border-color:var(--brown);box-shadow:inset 0 0 0 1px var(--brown)}
+.plan input{grid-row:1/span 2;margin:3px 0 0;width:18px;height:18px;accent-color:var(--brown)}
+.plan input:focus-visible{outline:2px solid var(--brown);outline-offset:2px}
+.plan-name{font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--clay);color:var(--cream);padding:2px 8px;border-radius:999px}
+.tag-save{background:var(--olive-deep)}
+.theme-line{margin:-8px 0 0;font-size:14px;font-weight:600;display:flex;gap:8px;align-items:flex-start}
+.theme-line::before{content:"";width:8px;height:8px;margin-top:7px;border-radius:50%;background:var(--olive-deep);flex:none}
+.pay-lead{margin:-4px 0 0;font-size:14px;color:var(--muted)}
+.m-only{display:none}
+.more{display:none}
+.plan-price{font-family:var(--display);font-size:21px;line-height:1.2;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.plan-price small{display:block;font-family:var(--body);font-size:12px;color:var(--muted)}
+.plan-sub{grid-column:2/4;margin:0;font-size:14px;color:var(--muted)}
+
+.summary{margin:0;padding-top:18px;border-top:1px solid var(--line);display:grid;grid-template-columns:auto auto;gap:8px 16px;font-variant-numeric:tabular-nums}
+.summary dt{color:var(--muted);font-size:14px}
+.summary dd{margin:0;text-align:right;font-size:14px}
+.summary .total dt,.summary .total dd{color:var(--brown);font-weight:700;font-size:16px}
+.fine{margin:-6px 0 0;font-size:13px;color:var(--muted)}
+
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  background:var(--olive);color:var(--brown);text-decoration:none;
+  font:700 14.5px/1.2 var(--body);letter-spacing:.1em;text-transform:uppercase;
+  padding:17px 20px;border:0;border-radius:var(--r);cursor:pointer;
+  transition:background-color .15s,transform .15s;
+}
+.btn:hover{background:var(--olive-hover)}
+.btn:active{transform:translateY(1px)}
+.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.secure{display:flex;gap:8px;align-items:flex-start;margin:-8px 0 0;font-size:13px;color:var(--muted)}
+.secure svg{flex:none;margin-top:2px}
+.setup{margin:0;font-size:13px;line-height:1.5;color:var(--clay);background:rgba(194,69,45,.08);border-radius:var(--r);padding:10px 12px}
+
+/* ---------- Welcome ---------- */
+.welcome{padding-block:40px 120px;display:grid;gap:48px}
+.w-hero{display:flex;gap:32px;align-items:flex-end}
+.w-hero .arch{width:190px}
+.w-hero .intro-text{gap:14px}
+
+.first{
+  display:grid;grid-template-columns:minmax(0,1fr);gap:28px 48px;align-items:center;
+  background:var(--paper);border:1px solid var(--brown);border-radius:var(--r);padding:32px;
+}
+.first-body{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px 48px;align-items:center;min-width:0}
+/* With Dr. Lily's welcome video: a vertical video sits beside the step; a horizontal one sits above it */
+.first.has-video{grid-template-columns:minmax(0,300px) minmax(0,1fr)}
+.first.has-video:not(.wide) .first-body{grid-template-columns:minmax(0,1fr)}
+.first.has-video.wide{grid-template-columns:minmax(0,1fr)}
+.first.has-video.wide .w-video{width:75%;justify-self:center}   /* desktop: 25% smaller than the card */
+.w-video{min-width:0}
+.w-video-frame{width:100%;border-radius:var(--r);overflow:hidden;background:var(--brown)}
+.w-video-frame wistia-player{display:block;width:100%;height:100%}
+.w-video-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;
+  color:var(--cream);background:var(--brown);font-family:var(--display);font-size:clamp(20px,2.4vw,28px);line-height:1.2}
+.first-text{display:grid;gap:12px;min-width:0}
+.first h2{font-size:clamp(1.6rem,3vw,2.1rem)}
+.first p{margin:0;max-width:56ch}
+.first-cta{display:grid;gap:10px}
+.note{margin:0;font-size:13px;color:var(--muted)}
+
+.w-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.w-grid section{display:grid;gap:12px;align-content:start;padding-top:20px;border-top:1px solid var(--line);min-width:0}
+.w-grid h3{font-size:24px}
+.w-grid p{margin:0}
+.links{display:grid;gap:10px;margin-top:4px}
+.lbtn{
+  display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid var(--line);border-radius:var(--r);
+  background:var(--paper);text-decoration:none;font-weight:600;font-size:15px;transition:border-color .15s,background-color .15s;
+}
+.lbtn:hover{border-color:var(--brown);background:var(--paper-hi)}
+.lbtn svg{flex:none;color:var(--olive-deep)}
+.lbtn .go{margin-left:auto;color:var(--muted)}
+.lbtn.missing{border-style:dashed;cursor:default}
+.lbtn.missing:hover{border-color:var(--line);background:var(--paper)}
+.miss{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--clay)}
+.qa-date{font-size:26px}
+.textlink{font-weight:600;color:var(--brown);text-underline-offset:3px}
+.w-sub{display:grid;gap:12px;margin-top:10px;padding-top:20px;border-top:1px solid var(--line)}
+
+footer{border-top:1px solid var(--line);padding-block:22px 90px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+footer a{color:var(--muted)}
+
+/* Prototype switcher (turn off with CONFIG.preview = false) */
+.pv{
+  position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20;
+  display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:var(--brown);color:var(--cream);
+  box-shadow:0 12px 30px -12px rgba(60,44,36,.6);font-size:12.5px;max-width:calc(100% - 32px);
+}
+.pv span{padding:0 10px 0 12px;opacity:.75;white-space:nowrap}
+.pv button{border:0;border-radius:999px;padding:8px 14px;background:transparent;color:var(--cream);font:600 12.5px var(--body);cursor:pointer;white-space:nowrap}
+.pv button[aria-pressed="true"]{background:var(--cream);color:var(--brown)}
+
+@media (max-width:860px){
+  /* Phones: a two-line recap, then straight to the plan picker and form; the full intro and story sit below the form */
+  .checkout{grid-template-columns:minmax(0,1fr);grid-template-areas:"intro" "card" "more" "story";row-gap:28px;padding-block:22px 110px}
+  .intro .arch,.intro .lede,.intro .cred{display:none}
+  .intro{gap:0}
+  .m-only{display:inline}
+  .more{grid-area:more;display:grid;gap:14px}
+  .left{display:contents}
+  .intro{grid-area:intro}
+  .story{grid-area:story}
+  .card{position:static}
+  .first,.first.has-video{grid-template-columns:minmax(0,1fr);padding:24px}
+  .first.has-video.wide .w-video{width:100%}
+  .first-body{grid-template-columns:minmax(0,1fr)}
+  .first.has-video:not(.wide) .w-video{max-width:340px}
+  .w-grid{grid-template-columns:minmax(0,1fr);gap:32px}
+}
+@media (max-width:640px){
+  .top{padding-block:14px 0}
+  .top img{width:28px;height:28px}
+  .top .serif{font-size:18px}
+}
+@media (max-width:540px){
+  .intro-row,.w-hero{gap:18px}
+  .arch{width:104px}
+  .w-hero .arch{width:112px}
+  .card{padding:20px}
+  .embed{margin-inline:-20px}
+  .steps li{grid-template-columns:92px minmax(0,1fr);column-gap:12px}
+  .pv span{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+<header class="top wrap">
+  <img src="data:image/png;base64,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" width="34" height="34" alt="">
+  <div class="serif">REVIVAL</div>
+</header>
+
+<div class="planbar" id="planbar" aria-hidden="true">
+  <div class="wrap">
+    <span id="planbar-text"><strong>Annual</strong> · $490 a year</span>
+    <button type="button" id="planbar-change" tabindex="-1">Change plan</button>
+  </div>
+</div>
+
+<!-- ============ CHECKOUT ============ -->
+<main id="view-checkout" class="wrap checkout">
+  <div class="left" id="left">
+  <div class="intro">
+    <div class="intro-row">
+      <div class="arch john-photo" role="img" aria-label="Dr. John Baker working with a patient"></div>
+      <div class="intro-text">
+        <p class="label">REVIVAL membership<span class="m-only">, led by Dr. Lily Baker</span></p>
+        <h1>Start today. <em id="h1-line">Be ready on November 16.</em></h1>
+      </div>
+    </div>
+    <p class="lede" id="lede">Every new member begins with the six Foundation videos, so joining now means you're ready when Heal Your Pelvic Floor opens inside REVIVAL on Monday, November 16.</p>
+    <p class="cred">REVIVAL is led by <strong>Dr. Lily Baker</strong>, Chiropractic Physician and Certified Strength and Conditioning Specialist. This page is from <strong>Dr. John Baker</strong>, Chiropractic Physician, CSCS, DNSET.</p>
+  </div>
+
+
+
+  <div class="more" id="more">
+    <p class="lede" id="lede-m"></p>
+    <p class="cred">REVIVAL is led by <strong>Dr. Lily Baker</strong>, Chiropractic Physician and Certified Strength and Conditioning Specialist. This page is from <strong>Dr. John Baker</strong>, Chiropractic Physician, CSCS, DNSET.</p>
+  </div>
+
+  <div class="story">
+    <section aria-labelledby="next-title">
+      <h2 class="label" id="next-title">What happens when you join</h2>
+      <ol class="steps" id="steps">
+        <li><span class="when">Today</span><p class="what">Choose your plan, create your account and pay, all on this page.</p></li>
+        <li><span class="when">Right after</span><p class="what">Your welcome page opens with links to the REVIVAL app and the community.</p></li>
+        <li><span class="when">Today</span><p class="what">Start the six Foundation videos.</p></li>
+        <li><span class="when" id="step4-when">Mon, Nov 16</span><p class="what" id="step4-what">Heal Your Pelvic Floor opens, and you're ready.</p></li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="inc-title">
+      <h2 class="label" id="inc-title">What's included</h2>
+      <ul class="included">
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>The Foundation series.</strong> Six videos every new member starts with.</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Heal Your Pelvic Floor.</strong> <span id="inc-theme">November's theme, opening Monday, November 16.</span></span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Workouts from 10 to 60 minutes.</strong> Sessions designed to fit into a busy life.</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>A live Q&amp;A every other week.</strong> Bring your questions to Dr. Lily, live.</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>The full video library.</strong> Past themes like Your Back Hurts and Build Muscle and Bone Without Lifting Heavy, plus the Reshape and Regulate series.</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>The community.</strong> Members connecting and asking questions, with Dr. Lily and Tracy, an osteopath, there to support you.</span></li>
+        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>The REVIVAL app.</strong> On iPhone, Android and the web.</span></li>
+      </ul>
+    </section>
+
+    <div class="quotes">
+      <figure class="quote">
+        <p>“For the first time in my life I have a sore gluteus medius.”</p>
+        <cite>Puck, after years of boxing, yoga, pilates and strength training</cite>
+      </figure>
+      <figure class="quote">
+        <p>“…the pelvic floor dysfunction is significantly reduced. Now, when I sit on the toilet, things flow freely…”</p>
+        <cite>Tracy, after pelvic floor PT for a rectocele</cite>
+      </figure>
+      <figure class="quote">
+        <p>“I had no idea how much the holding pattern in my pelvis has been blocking me my entire life.”</p>
+        <cite>Miranda Johnson, bodyworker, in Dr. Lily's community</cite>
+      </figure>
+    </div>
+
+    <p class="help">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      <span>Questions before you join? Email <a class="email" href="mailto:hello@repatternco.com">hello@repatternco.com</a> and the team will help.</span>
+    </p>
+  </div>
+  </div>
+
+  <aside class="card" aria-labelledby="card-title">
+    <div class="card-head">
+      <h2 id="card-title">REVIVAL</h2>
+      <div class="headprice" id="head-price">$490<small>/ year</small></div>
+    </div>
+
+    <fieldset id="plans">
+      <legend class="label">Choose your plan</legend>
+      <label class="plan is-on" id="plan-annual-wrap">
+        <input type="radio" name="plan" id="plan-annual" value="annual" checked>
+        <span class="plan-name">Annual <span class="tag">Recommended</span><span class="tag tag-save">Save $98</span></span>
+        <span class="plan-price">$490<small>a year</small></span>
+        <span class="plan-sub">12 months for the price of 10. About $41 a month, billed yearly.</span>
+      </label>
+      <label class="plan" id="plan-monthly-wrap">
+        <input type="radio" name="plan" id="plan-monthly" value="monthly">
+        <span class="plan-name">Monthly</span>
+        <span class="plan-price">$49<small>a month</small></span>
+        <span class="plan-sub">Month to month, cancel anytime</span>
+      </label>
+    </fieldset>
+
+    <p class="theme-line" id="theme-line">Heal Your Pelvic Floor opens Monday, November 16.</p>
+
+    <div class="terms">
+      <p class="allin" id="allin">Sales tax and a processing fee are added at payment.</p>
+      <p class="fine" id="fine">Renews once a year. Cancel anytime from your account before your renewal date.</p>
+    </div>
+
+    <div class="pay">
+      <p class="label" id="pay-label">Your account and payment</p>
+      <p class="pay-lead">Takes about two minutes. You'll create your account and enter payment below.</p>
+      <div class="embed" id="embed">
+        <iframe id="sutraWidgetIframe" title="REVIVAL checkout on Arketa" allow="payment" hidden></iframe>
+        <div class="embed-ph" id="embed-ph">
+          <p class="ph-title">Arketa's secure checkout loads here on Lily's site</p>
+          <p class="ph-plan" id="ph-plan">Plan: Annual, $490 a year</p>
+          <ul>
+            <li>Name, email and password to create the member account</li>
+            <li>Total with sales tax and processing fee</li>
+            <li>Card payment, then straight to the welcome page</li>
+          </ul>
+          <p class="ph-note" id="ph-note">Other sites can't load inside this Claude preview, so the live form only shows once the page is on revival.repatternco.com.</p>
+        </div>
+      </div>
+      <p class="secure">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <span>Your account and payment are handled by Arketa, the secure platform where your REVIVAL membership and app live.</span>
+      </p>
+    </div>
+  </aside>
+</main>
+
+<!-- ============ THANK-YOU ============ -->
+<main id="view-welcome" class="wrap welcome" hidden>
+  <div class="w-hero">
+    <div class="arch john-photo" role="img" aria-label="Dr. John Baker working with a patient"></div>
+    <div class="intro-text">
+      <p class="label">REVIVAL membership</p>
+      <h1>Welcome to REVIVAL. <em>You're in.</em></h1>
+      <p class="lede" id="w-plan">Here's how to get started today.</p>
+    </div>
+  </div>
+
+  <section class="first" id="first" aria-labelledby="first-title">
+    <div class="w-video" id="w-video" hidden>
+      <div class="w-video-frame" id="w-video-frame"></div>
+    </div>
+    <div class="first-body">
+    <div class="first-text">
+      <p class="label">Start here</p>
+      <h2 id="first-title">Watch the Start Here videos, then begin Foundation</h2>
+      <p>Dr. Lily shows you around REVIVAL and how to get the most from it. Then start the first Foundation video. Every member begins here before any theme work.</p>
+    </div>
+    <div class="first-cta">
+      <a class="btn" id="start-here" href="#">Open Start Here
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="note">Sign in with the email you used at checkout.</p>
+    </div>
+    </div>
+  </section>
+
+  <div class="w-grid">
+    <section aria-labelledby="app-title">
+      <p class="label">Get the app</p>
+      <h3 id="app-title">REVIVAL on every device</h3>
+      <p>Use the same email you checked out with.</p>
+      <div class="links" id="app-links"></div>
+    </section>
+
+    <section aria-labelledby="com-title">
+      <p class="label">Community</p>
+      <h3 id="com-title">Say hello</h3>
+      <p>Reset your password with the email you used to sign up. Do not make a new account. You already have an account, you just need to reset your password to get access.</p>
+      <div class="links" id="com-links"></div>
+      <p class="note">If it doesn't let you in yet, give it a few minutes and try again.</p>
+      <p>Once you're in, post one line about where you're joining from and what brought you to REVIVAL.</p>
+    </section>
+
+    <section aria-labelledby="qa-title" id="qa-section">
+      <p class="label" id="qa-label">Live Q&amp;A with Dr. Lily</p>
+      <h3 id="qa-title" class="qa-date">Every other Wednesday</h3>
+      <p id="qa-time">9:00 AM Pacific · 12:00 PM Eastern · 50 minutes</p>
+      <p id="qa-cal-wrap" hidden>Add it to <a class="textlink" id="qa-cal" href="#">Google Calendar</a> or <a class="textlink" id="qa-ical" href="#">Apple Calendar</a></p>
+      <p>Join in the app under Live Q&amp;As, or on the website under the <a class="textlink" id="qa-lives" href="https://www.repatternco.com/lives">Lives tab</a>.</p>
+      <div class="w-sub" role="group" aria-labelledby="vr-title">
+        <p class="label" id="vr-title">Video requests</p>
+        <p>Want Dr. Lily to make a video on something? Send your request in the HUB in the app, or on the website.</p>
+        <div class="links" id="vr-links"></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="wrap">
+  <span>REVIVAL by Dr. Lily Baker · REPATTERN co</span>
+  <span>Questions? <a class="email" href="mailto:hello@repatternco.com">hello@repatternco.com</a></span>
+</footer>
+
+<div class="pv" id="pv" hidden role="group" aria-label="Prototype pages">
+  <span>Prototype</span>
+  <button type="button" id="pv-checkout" aria-pressed="true">Checkout</button>
+  <button type="button" id="pv-welcome" aria-pressed="false">Thank-you page</button>
+</div>
+
+<script>
+/* ===== Settings: edit these before going live ===== */
+const CONFIG = {
+  preview: false,                       // false on the live site (hides the prototype switcher)
+  defaultPlan: "annual",               // preselected plan; ?plan=monthly or #monthly overrides it
+  supportEmail: "hello@repatternco.com",
+  theme: { name: "Heal Your Pelvic Floor", month: "November", opens: "2026-11-16T00:00:00-08:00" },
+  plans: {
+    annual:  { price: 490, unit: "year",  months: 12 },
+    monthly: { price: 49,  unit: "month", months: 1 }
+  },
+  liveHosts: ["repatternco.com"],      // where the real Arketa form is allowed to load
+  arketaSlug: "repattern",
+  // Arketa pricing option IDs (the last part of each checkout link).
+  // These are Lily's options for now, so the page works on day one. Swap in John's own hidden
+  // monthly and annual options once they're created, so his sales show up under their own names.
+  checkout: {
+    monthly: "0LtKOR7tIxE49QejFnpR",
+    annual:  "h9hAiBOcK5zoPXWxvuF0"
+  },
+  allIn: {                             // what Arketa charges with Lily's current 8% sales tax and processing fee
+    monthly: 54.81,
+    annual:  545.31
+  },
+  links: {
+    startHere: "https://app.arketa.co/repattern/on-demand/ScsHP5I2ks8OhBl2csuB",
+    web:       "https://www.repatternco.com/membership",   // "REVIVAL on every device" browser link (Lily's website, not the Arketa page)
+    iphone:    "https://apps.apple.com/us/app/repattern-co/id6778624062",   // App Store listing for the branded app
+    android:   "https://api.arketa.com/apk/repattern",   // Android app download
+    community: "https://login.repatternco.com/communities/groups/repattern/home",  // REVIVAL community on Course Creator
+    lives:     "https://www.repatternco.com/lives",            // Live Q&As on the website
+    videoRequests: "https://www.repatternco.com/video-requests" // Video requests on the website (the HUB in the app)
+  },
+  welcomeVideo: {                      // Dr. Lily's video on the thank-you page
+    wistiaId: "",                      // Wistia media ID (the code in the video's Wistia link)
+    aspect: 1.7778                     // 1.7778 for horizontal (16:9), 0.5625 for a vertical phone video
+  },
+  // Live Q&A with Dr. Lily: the next date is read from her Arketa schedule each time the page opens.
+  // If Arketa doesn't answer, the page works it out from the rule below (every other Wednesday, 9:00 AM Pacific).
+  qaSchedule: {
+    url: "https://widget-api-tkaeguucxq-uc.a.run.app/BXdd9ORSSAdMNSHZKBssQiGbzqR2/schedule",
+    match: /q\s*&\s*a/i,              // class names that count as the live Q&A
+    anchor: "2026-11-04",              // a known Q&A date
+    time: "09:00", tz: "America/Los_Angeles", everyDays: 14
+  },
+  qaMinutes: 50,
+  // Apple Calendar: a ready-made .ics file for each regular Q&A date (every other Wednesday, 9:00 AM Pacific).
+  // A date off that pattern gets a file built on the spot instead.
+  qaIcs: { base: "https://join.repatternco.com/checkout/qa/", until: "2028-12-31" }
+};
+
+(function(){
+  // After payment Arketa redirects inside the embedded form. If this page opened inside our own
+  // frame, move it to the full window so the member sees the whole welcome page.
+  try {
+    const isWelcome = /welcome/.test(location.hash) || new URLSearchParams(location.search).get("view") === "welcome";
+    if (isWelcome && window.top !== window.self){
+      let sameOrigin = false;
+      try { sameOrigin = window.top.location.origin === location.origin; } catch(e){}
+      if (sameOrigin){ window.top.location.replace(location.href); return; }
+      // Welcome page on another of Lily's subdomains: ask the checkout page to open it.
+      if (/(^|\.)repatternco\.com$/.test(location.hostname)) window.parent.postMessage({ revivalWelcome: location.href }, "*");
+    }
+  } catch(e){}
+  window.addEventListener("message", (e) => {
+    try {
+      if (!/(^|\.)repatternco\.com$/.test(new URL(e.origin).hostname)) return;
+      const url = e.data && e.data.revivalWelcome;
+      if (typeof url === "string" && /(^|\.)repatternco\.com$/.test(new URL(url).hostname)) location.href = url;
+    } catch(err){}
+  });
+
+  const $ = (s) => document.querySelector(s);
+  const now = new Date();
+  const money = (n) => "$" + n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  const fmtDate = (d) => d.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+  function addMonths(d, n){
+    const r = new Date(d.getFullYear(), d.getMonth() + n, 1);
+    const last = new Date(r.getFullYear(), r.getMonth() + 1, 0).getDate();
+    r.setDate(Math.min(d.getDate(), last));
+    return r;
+  }
+
+  /* ---- Theme timing ---- */
+  const opens = new Date(CONFIG.theme.opens);
+  const themeOpen = now >= opens;
+  const opensLong = opens.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",timeZone:"America/Los_Angeles"});
+  const opensMd = opens.toLocaleDateString("en-US",{month:"long",day:"numeric",timeZone:"America/Los_Angeles"});
+  const opensShort = opens.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric",timeZone:"America/Los_Angeles"});
+  const T = CONFIG.theme.name, M = CONFIG.theme.month;
+  if (themeOpen){
+    $("#h1-line").textContent = T + " is open.";
+    $("#lede").textContent = "Join, begin the six Foundation videos, and move into " + M + "'s videos at your own pace. Everything stays in the library.";
+    $("#step4-when").textContent = "Your own pace";
+    $("#step4-what").textContent = "Work through " + M + "'s videos. Everything stays in the library.";
+    $("#inc-theme").textContent = M + "'s theme, open now.";
+    $("#theme-line").textContent = T + " is open now.";
+  } else {
+    $("#h1-line").textContent = "Be ready on " + opensMd + ".";
+    $("#lede").textContent = "Every new member begins with the six Foundation videos, so joining now means you're ready when " + T + " opens inside REVIVAL on " + opensLong + ".";
+    $("#step4-when").textContent = opensShort;
+    $("#step4-what").textContent = T + " opens, and you're ready.";
+    $("#inc-theme").textContent = M + "'s theme, opening " + opensLong + ".";
+    $("#theme-line").textContent = T + " opens " + opensLong + ".";
+  }
+
+  $("#lede-m").textContent = $("#lede").textContent;
+
+  /* ---- Support email ---- */
+  document.querySelectorAll("a.email").forEach(a => { a.href = "mailto:" + CONFIG.supportEmail; a.textContent = CONFIG.supportEmail; });
+
+  /* ---- State from the URL ---- */
+  function readState(){
+    const q = new URLSearchParams(location.search);
+    const h = (location.hash || "").slice(1).toLowerCase();
+    const view = (q.get("view") === "welcome" || h.indexOf("welcome") === 0 || /\/welcome\/?$/.test(location.pathname)) ? "welcome" : "checkout";
+    let plan = h.indexOf("monthly") > -1 ? "monthly" : h.indexOf("annual") > -1 ? "annual" : q.get("plan");
+    if (plan !== "annual" && plan !== "monthly") plan = null;
+    return { view, plan };
+  }
+
+  /* ---- Checkout with the embedded Arketa form ---- */
+  // The live form only loads on Lily's own site; in the Claude preview a placeholder shows where it sits.
+  const canEmbed = !CONFIG.preview || CONFIG.liveHosts.some(h => location.hostname === h || location.hostname.endsWith("." + h));
+  const iframe = $("#sutraWidgetIframe"), ph = $("#embed-ph");
+  if (canEmbed){ const s = document.createElement("script"); s.src = "https://app.arketa.co/scripts/embed.js"; document.body.appendChild(s); }
+
+  // On the live site, fall back to monthly until the annual pricing option exists in Arketa.
+  const startPlan = (!CONFIG.preview && !CONFIG.checkout[CONFIG.defaultPlan]) ? "monthly" : CONFIG.defaultPlan;
+  let plan = readState().plan || startPlan;
+  function setPlan(p){
+    plan = p;
+    const P = CONFIG.plans[p], name = p === "annual" ? "Annual" : "Monthly", per = p === "annual" ? " a year" : " a month";
+    $("#plan-annual").checked = p === "annual";
+    $("#plan-monthly").checked = p === "monthly";
+    $("#plan-annual-wrap").classList.toggle("is-on", p === "annual");
+    $("#plan-monthly-wrap").classList.toggle("is-on", p === "monthly");
+    $("#head-price").innerHTML = "$" + P.price + "<small>/ " + P.unit + "</small>";
+    const all = CONFIG.allIn[p];
+    $("#allin").textContent = all ? money(all) + per + " with sales tax and the processing fee." : "Sales tax and a processing fee are added at payment.";
+    $("#fine").textContent = p === "annual"
+      ? "Renews once a year, next on " + fmtDate(addMonths(now, 12)) + ". Cancel anytime from your account before your renewal date."
+      : "Renews every month. Month to month, cancel anytime from your account.";
+    $("#planbar-text").innerHTML = "<strong>" + name + "</strong> · $" + P.price + per;
+    $("#ph-plan").textContent = "Plan: " + name + ", $" + P.price + per;
+
+    const id = CONFIG.checkout[p];
+    if (canEmbed && id){
+      const src = "https://app.arketa.co/iframe/" + CONFIG.arketaSlug + "/pricing/checkout/" + id;
+      if (iframe.getAttribute("src") !== src) iframe.setAttribute("src", src);
+      iframe.hidden = false; ph.hidden = true;
+    } else {
+      iframe.hidden = true; ph.hidden = false;
+      $("#ph-note").textContent = id
+        ? "Other sites can't load inside this Claude preview, so the live form only shows once the page is on revival.repatternco.com."
+        : "The " + p + " pricing option isn't in Arketa yet. Once it's created, its checkout ID goes in the settings at the top of the page script.";
+    }
+    try { const u = new URL(location.href); u.searchParams.set("plan", p); history.replaceState(null, "", u); } catch(e){}
+  }
+  document.querySelectorAll('input[name="plan"]').forEach(r => r.addEventListener("change", e => setPlan(e.target.value)));
+  setPlan(plan);
+
+  /* ---- Left column: stop scrolling once its last line is in view ---- */
+  const leftEl = $("#left");
+  function stickLeft(){
+    if (!leftEl) return;
+    if (window.innerWidth <= 860){ leftEl.style.top = ""; return; }
+    leftEl.style.top = Math.min(24, window.innerHeight - leftEl.offsetHeight - 24) + "px";
+  }
+  window.addEventListener("resize", stickLeft);
+  if ("ResizeObserver" in window) new ResizeObserver(stickLeft).observe(leftEl);
+  stickLeft();
+
+  /* ---- Plan bar: keeps the chosen plan in view while they fill in the form ---- */
+  const plansEl = $("#plans"), embedEl = $("#embed"), bar = $("#planbar"), barBtn = $("#planbar-change");
+  function updateBar(){
+    const onCheckout = !$("#view-checkout").hidden;
+    const show = onCheckout && plansEl.getBoundingClientRect().bottom < 0 && embedEl.getBoundingClientRect().bottom > 120;
+    bar.classList.toggle("show", show);
+    bar.setAttribute("aria-hidden", String(!show));
+    barBtn.tabIndex = show ? 0 : -1;
+  }
+  let ticking = false;
+  window.addEventListener("scroll", () => { if (!ticking){ ticking = true; requestAnimationFrame(() => { ticking = false; updateBar(); }); } }, { passive: true });
+  barBtn.addEventListener("click", () => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    plansEl.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    $("#plan-" + plan).focus({ preventScroll: true });
+  });
+
+  /* ---- Thank-you page ---- */
+  $("#start-here").href = CONFIG.links.startHere;
+  const icons = {
+    phone: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/></svg>',
+    web: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>',
+    people: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c.6-3.2 3-5 6-5s5.4 1.8 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 14.2c2.3.3 3.9 1.9 4.5 4.3"/></svg>'
+  };
+  const arrow = '<svg class="go" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+  function linkBtn(label, url, icon){
+    if (url) return '<a class="lbtn" href="' + url + '">' + icons[icon] + '<span>' + label + '</span>' + arrow + '</a>';
+    return CONFIG.preview ? '<div class="lbtn missing">' + icons[icon] + '<span>' + label + '</span><span class="miss">Link needed</span></div>' : '';
+  }
+  $("#app-links").innerHTML = linkBtn("Open in your browser", CONFIG.links.web, "web") + linkBtn("Access our app (Apple)", CONFIG.links.iphone, "phone") + linkBtn("Access our app (Android)", CONFIG.links.android, "phone");
+  $("#com-links").innerHTML = CONFIG.links.community ? linkBtn("Open the community", CONFIG.links.community, "people") : "";
+  $("#qa-lives").href = CONFIG.links.lives;
+  $("#vr-links").innerHTML = linkBtn("Request a video", CONFIG.links.videoRequests, "web");
+
+  // Wall-clock time in a time zone to the exact moment (handles daylight saving).
+  function zonedToDate(ymd, hm, tz){
+    const [y,m,d] = ymd.split("-").map(Number), [hh,mm] = hm.split(":").map(Number);
+    const guess = Date.UTC(y, m - 1, d, hh, mm);
+    const parts = new Intl.DateTimeFormat("en-US",{timeZone:tz,hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}).formatToParts(new Date(guess));
+    const g = (k) => Number(parts.find(p => p.type === k).value);
+    const asTz = Date.UTC(g("year"), g("month") - 1, g("day"), g("hour") % 24, g("minute"));
+    return new Date(guess - (asTz - guess));
+  }
+  function ruleQa(){
+    const S = CONFIG.qaSchedule, dayMs = 86400000;
+    const a = new Date(S.anchor + "T12:00:00Z");
+    let n = Math.max(0, Math.floor((now - a) / (S.everyDays * dayMs)) - 1);
+    for (let i = 0; i < 6; i++, n++){
+      const day = new Date(a.getTime() + n * S.everyDays * dayMs).toISOString().slice(0,10);
+      const start = zonedToDate(day, S.time, S.tz);
+      if (start.getTime() + CONFIG.qaMinutes * 60000 > now.getTime()) return { start, minutes: CONFIG.qaMinutes };
+    }
+    return null;
+  }
+  async function arketaQa(){
+    const S = CONFIG.qaSchedule;
+    const u = S.url + "?startDateTime=" + encodeURIComponent(new Date(now.getTime() - 3600000).toISOString()) +
+              "&endDateTime=" + encodeURIComponent(new Date(now.getTime() + 120 * 86400000).toISOString());
+    const ctl = ("AbortController" in window) ? new AbortController() : null;
+    const timer = setTimeout(() => ctl && ctl.abort(), 6000);
+    try {
+      const r = await fetch(u, { credentials: "omit", signal: ctl ? ctl.signal : undefined });
+      if (!r.ok) return null;
+      const j = await r.json();
+      const list = (j && j.data && j.data.classes) || [];
+      const next = list
+        .filter(c => c && !c.canceled && S.match.test(c.name || "") && typeof c.start_time === "number")
+        .map(c => ({ start: new Date(c.start_time * 1000), minutes: Number(c.duration) || CONFIG.qaMinutes }))
+        .filter(c => c.start.getTime() + c.minutes * 60000 > now.getTime())
+        .sort((x, y) => x.start - y.start)[0];
+      return next || null;
+    } catch(e){ return null; } finally { clearTimeout(timer); }
+  }
+  const QA_TITLE = "REVIVAL live Q&A with Dr. Lily";
+  const QA_DETAILS = "Join in the REVIVAL app under Live Q&As, or on the website under the Lives tab: " + CONFIG.links.lives;
+  const ymdIn = (d, tz) => {
+    const p = new Intl.DateTimeFormat("en-US",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d);
+    const g = (k) => p.find(x => x.type === k).value;
+    return g("year") + "-" + g("month") + "-" + g("day");
+  };
+  function fold(line){                 // calendar files keep lines to 75 characters
+    const out = [];
+    while (line.length > 75){ out.push(line.slice(0, 75)); line = " " + line.slice(75); }
+    out.push(line);
+    return out.join("\r\n");
+  }
+  function icsText(start, end){
+    const z = (d) => d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+    const esc = (t) => t.replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,");
+    return ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//REPATTERN co//REVIVAL//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
+      "BEGIN:VEVENT","UID:revival-live-qa-" + z(start) + "@repatternco.com","DTSTAMP:" + z(new Date()),
+      "DTSTART:" + z(start),"DTEND:" + z(end),"SUMMARY:" + esc(QA_TITLE),"DESCRIPTION:" + esc(QA_DETAILS),"URL:" + CONFIG.links.lives,
+      "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:" + esc(QA_TITLE),"TRIGGER:-PT15M","END:VALARM",
+      "END:VEVENT","END:VCALENDAR",""].map(fold).join("\r\n");
+  }
+  function appleCalHref(start, mins){
+    const S = CONFIG.qaSchedule, I = CONFIG.qaIcs, ymd = ymdIn(start, S.tz);
+    const days = Math.round((new Date(ymd + "T12:00:00Z") - new Date(S.anchor + "T12:00:00Z")) / 86400000);
+    const regular = I && ymd >= S.anchor && ymd <= I.until && days % S.everyDays === 0 &&
+      mins === CONFIG.qaMinutes && zonedToDate(ymd, S.time, S.tz).getTime() === start.getTime();
+    if (regular) return I.base + ymd + ".ics";
+    return "data:text/calendar;charset=utf-8," + encodeURIComponent(icsText(start, new Date(start.getTime() + mins * 60000)));
+  }
+  function showQa(q){
+    if (!q) return;   // no date known: the card keeps its evergreen text (every other Wednesday, 9:00 AM Pacific)
+    const nextQa = q.start, mins = q.minutes;
+    const end = new Date(nextQa.getTime() + mins * 60000);
+    const tf = (tz) => nextQa.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",timeZone:tz});
+    $("#qa-title").textContent = nextQa.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",timeZone:"America/Los_Angeles"});
+    $("#qa-time").textContent = tf("America/Los_Angeles") + " Pacific · " + tf("America/New_York") + " Eastern · " + mins + " minutes";
+    const z = (d) => d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+    $("#qa-cal").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(QA_TITLE) +
+      "&dates=" + z(nextQa) + "/" + z(end) + "&details=" + encodeURIComponent(QA_DETAILS);
+    $("#qa-ical").href = appleCalHref(nextQa, mins);
+    $("#qa-label").textContent = "Next live Q&A";
+    $("#qa-cal-wrap").hidden = false;
+  }
+  let qaStarted = false;
+  function loadQa(){
+    if (qaStarted) return;
+    qaStarted = true;
+    showQa(ruleQa());                                  // instant answer from the rule
+    arketaQa().then(q => { if (q) showQa(q); });       // then the real date from Arketa
+  }
+
+  /* ---- Dr. Lily's welcome video (Wistia, same player as the VSL pages) ---- */
+  const V = CONFIG.welcomeVideo || {};
+  const vId = /^[a-z0-9]+$/i.test(V.wistiaId || "") ? V.wistiaId : "";
+  const vAspect = Number(V.aspect) > 0 ? Number(V.aspect) : 0.5625;
+  let videoReady = false;
+  function setupVideo(){
+    if (videoReady) return;
+    videoReady = true;
+    if (!vId) return;                    // no video yet: keep the video area hidden (no placeholder)
+    const first = $("#first"), frame = $("#w-video-frame");
+    $("#w-video").hidden = false;
+    first.classList.add("has-video");
+    if (vAspect >= 1) first.classList.add("wide");
+    frame.style.aspectRatio = String(vAspect);
+    if (vId){
+      [["https://fast.wistia.com/player.js", false], ["https://fast.wistia.com/embed/" + vId + ".js", true]].forEach(([src, mod]) => {
+        const s = document.createElement("script"); s.src = src; s.async = true; if (mod) s.type = "module"; document.head.appendChild(s);
+      });
+      frame.innerHTML = '<wistia-player media-id="' + vId + '" aspect="' + vAspect + '"></wistia-player>';
+    } else {
+      frame.innerHTML = '<div class="w-video-ph">Dr. Lily’s video is coming soon</div>';   // same placeholder as the VSL page
+    }
+  }
+
+  /* ---- Views ---- */
+  function render(){
+    const s = readState();
+    const isW = s.view === "welcome";
+    $("#view-checkout").hidden = isW;
+    $("#view-welcome").hidden = !isW;
+    document.title = isW ? "Welcome to REVIVAL" : "Join REVIVAL";
+    const p = s.plan;
+    $("#w-plan").textContent = (p === "annual" ? "Your annual membership is set up. " : p === "monthly" ? "Your monthly membership is set up. " : "") + "Here's how to get started today.";
+    $("#pv-checkout").setAttribute("aria-pressed", String(!isW));
+    $("#pv-welcome").setAttribute("aria-pressed", String(isW));
+    if (isW){ setupVideo(); loadQa(); }
+    updateBar();
+  }
+  if (CONFIG.preview){
+    $("#pv").hidden = false;
+    $("#pv-checkout").addEventListener("click", () => { location.hash = plan; render(); window.scrollTo(0,0); });
+    $("#pv-welcome").addEventListener("click", () => { location.hash = "welcome-" + plan; render(); window.scrollTo(0,0); });
+  }
+  window.addEventListener("hashchange", () => { const s = readState(); if (s.plan && s.view === "checkout") setPlan(s.plan); render(); });
+  render();
+})();
+</script>
+</body>
+</html>
